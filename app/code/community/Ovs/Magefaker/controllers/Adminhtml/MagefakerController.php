@@ -29,7 +29,9 @@ class Ovs_Magefaker_Adminhtml_MagefakerController extends Mage_Adminhtml_Control
      */
     public function saveAction()
     {
-        ini_set('memory_limit', '768M');
+
+        $mem = (int)$this->getRequest()->getParam('mem_consumption');
+        ini_set('memory_limit', $this->convertMemToMb($mem));
         set_time_limit(0);
 
         // set index modes to manual
@@ -103,6 +105,15 @@ class Ovs_Magefaker_Adminhtml_MagefakerController extends Mage_Adminhtml_Control
         }
 
         $this->_redirectReferer();
+    }
+
+    /*
+     * Converts GB to MB
+     */
+    private function convertMemToMb($memory)
+    {
+        $mem = (int)$memory * 1024;
+        return ''.$mem.'M';
     }
 
     /**

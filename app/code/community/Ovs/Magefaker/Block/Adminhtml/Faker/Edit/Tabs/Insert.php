@@ -12,6 +12,20 @@ class Ovs_Magefaker_Block_Adminhtml_Faker_Edit_Tabs_Insert extends Mage_Adminhtm
     {
         $form = new Varien_Data_Form();
 
+        // memory consumption
+        $memory = $form->addFieldset('mem_insert', [
+            'legend' => $this->__('Memory Consumption')
+        ]);
+
+        $memory->addField('mem_consumption', 'select', [
+            'label' => 'PHP Memory',
+            'required' => true,
+            'name' => 'mem_consumption',
+            'values' => Mage::getModel('ovs_magefaker/source_memory')->toOptionArray(),
+            'value'  => Mage::getModel('ovs_magefaker/source_memory')->getFirstValue(),
+            'after_element_html' => 'Sets PHP Memory',
+        ]);
+
         // category
         $category = $form->addFieldset('category_insert', [
             'legend' => $this->__('Categories'),
